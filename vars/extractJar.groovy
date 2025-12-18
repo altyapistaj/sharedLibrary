@@ -1,9 +1,14 @@
 def call (Map buildParams){
-    bat '''
-           rm -rf docker/layers
-           mkdir -p docker/layers
-           JAR_NAME=$(ls target/*.jar |head -n 1)
-           java -Djarmode=layertools -jar $JAR_NAME extract --destination docker/layers
+    //TODO: linux/bash komutlarına çevirilecek.
+    powershell '''
+           if (Test-Path '${layersDir}) { Remove-Item -Recurse -Force '${layersDir}' }
+           New-Item -ItemType Directory -Force -Path '${layersDir}' | out-Null
+           
+           \$jar = Get-ChildItem -Path 'target' -Filter '*.jar' | Select-Object -First 1
+           if(-not \$jar) {throw 'target klasorunde .jar yok.}
+           
+           Write-Host "Jar bulundu \$([\$jar].FullName)"
+           java Djarmode0layertools -jar \$jar.FullName extract --destination '${layersDir}'
            '''
 }
 
