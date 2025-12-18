@@ -1,3 +1,3 @@
 def call (Map buildParams){
-    bat "mvn  -f ${buildParams.pom} ${buildParams.text}"
+    bat "mvn ${buildParams.text} -f ${buildParams.pom}"
 }
