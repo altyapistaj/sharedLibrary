@@ -1,7 +1,9 @@
 def call(Map stageParams) {
+    def branch = stageParams.branch ?: (env.BRANCH_NAME ?: 'master')
+
     def scmVars = checkout([
             $class: 'GitSCM',
-            branches: [[name: env.BRANCH_NAME ]],
+            branches: [[name: "*/${branch}" ]],
             userRemoteConfigs: [[url: "https://github.com/"  + stageParams.gitPathName + "/" + stageParams.jobName + ".git"]],
             extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: stageParams.customWorkspace]]
     ])
