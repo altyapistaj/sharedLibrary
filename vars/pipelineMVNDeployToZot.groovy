@@ -5,7 +5,7 @@ def call () {
     pipeline {
 
             tools {
-                maven jobVariables.maven
+                maven vars.maven
                 echo 'maven'
             }
 
