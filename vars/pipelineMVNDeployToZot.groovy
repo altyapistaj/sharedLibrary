@@ -8,7 +8,7 @@ def call(Map cfg = [:]){
             stage('Checkout') {
                     gitCheckout(
                             gitPathName: cfg.gitPathName,
-                            jobName: cfg.jobName,
+                            gitAdressAndName: cfg.gitAdressAndName,
                             customWorkspace: cfg.customWorkspace,
                             branch: cfg.branch
                     )
