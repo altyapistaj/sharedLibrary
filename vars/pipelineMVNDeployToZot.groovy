@@ -51,14 +51,7 @@ def call () {
         }
 
 
-        post{
-            failure {
-                notifications()
-            }
-            success {
-                fingerprint '**/target/*.jar'
-            }
-        }
+
 
     }
 }
