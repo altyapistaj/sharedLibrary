@@ -1,88 +1,59 @@
-def call () {
+@Library('sharedLibrary@master') _
 
-    jobVariables("${JOB_NAME}")
+pipeline {
+    agent any
 
-    pipeline {
+    tools{
+        maven 'maven-3.9.12'
+    }
 
-        agent any
-
-        options {
-            disableConcurrentBuilds()
+    stages {
+        stage('Parameters'){
+            steps {
+                parametersGitCheckout()
+                echo 'Parametreler set edildi'
+            }
         }
-
-        tools {
-            jdk jobVariables.jdk
-            maven jobVariables.maven
+        stage('Checkout'){
+            when { expression { params.Checkout }}
+            steps {
+                gitCheckout(
+                        gitPathName: 'altyapistaj',
+                        jobName: 'demo-service',
+                        customWorkspace: 'workspace/demo-service',
+                        branch: 'library-dependency'
+                )
+            }
         }
-
-        stages {
-            stage('MavenSnapshotCheck') {
-                steps {
-                    script{
-                        echo env.BRANCH_NAME
-                        if (env.BRANCH_NAME.startsWith("master")) {
-                            mavenSnapshotCheck check: 'true'
-                            echo "MavenSnapshotCheck is done!!!"
-                        }
-                    }
-                }
-            }
-
-            stage('Clean Workspace') {
-                when { expression { params.Clean_Workspace }}
-                steps {
-                    sh "rm -rf ${JOB_NAME}"
-                }
-            }
-
-            stage('Checkout') {
-                when { expression { params.Checkout }}
-                steps{
-                    gitCheckout(gitAddressAndName: jobVariables.gitAddressAndName)
-                }
-            }
-
-            stage('Build') {
-                when { expression { params.Build } }
-                steps{
-                    sh "java -version"
-                    sh "mvn -version"
-                    mavenStage(text: 'clean install -U -N ' , pom: jobVariables.pom)
-                }
-            }
-
-            stage('SonarQube'){
-                when { expression { jobVariables.sonar }}
-                steps{
-                    sonarStage(projectName: jobVariables.projectName, jobPathName: jobVariables.jobPathName, jobName: jobVariables.jobName ,customWorkspace: "${WORKSPACE}"  )
-                }
-            }
-
-            stage("Quality Gate") {
-                when { expression { jobVariables.qg }}
-                steps {
-                    timeout(time: 1, unit: 'HOURS') {
-                        waitForQualityGate true
-                    }
-                }
-            }
-
-            stage('DeployToNexus') {
-                when { expression { params.DeployToNexus }}
-                steps{
-                    mavenStage(text: ' deploy ' , pom: jobVariables.pom)
+        stage('build'){
+            when { expression { params.Build }}
+            steps {
+                dir('workspace/demo-service'){
+                    mavenStage(text: 'clean install -U -N' , pom: 'pom.xml')
                 }
             }
         }
-
-        post{
-            failure {
-                notifications()
-            }
-            success {
-                fingerprint '**/target/*.jar'
+        stage('extract'){
+            when { expression { params.Extract }}
+            steps {
+                dir('workspace/demo-service'){
+                    extractJar()
+                }
             }
         }
-
+        stage('build Docker'){
+            when { expression { params.dockerBuild }}
+            steps {
+                dir('workspace/demo-service'){
+                    dockerBuild()
+                }
+            }
+        }
+        stage('push to Zot'){
+            when { expression { params.pushToZot }}
+            steps {
+                pushToZot()
+            }
+        }
     }
 }
