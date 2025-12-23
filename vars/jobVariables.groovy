@@ -1,16 +1,14 @@
 def call(String JOB_NAME){
     return [
-    slave : 'any',
+            projectName : 'shared-library-test',
+            jobName : "",
+            pom : 'pom.xml',
 
-    maven : 'maven-3.9.12',
-
-    projectName : 'shared-library-test',
-    jobName : "demo-service",
-    pom : 'pom.xml',
-
-    branch : "library-dependency",
-    customWorkspace : "workspace/demo-service",
-    gitPathName : "altyapistaj"
+            branch : "library-dependency",
+            customWorkspace : "workspace/" + JOB_NAME + "/",
+            gitPathName : "altyapistaj",
+            gitAdressAndName : "demo-service"
     ]
 
 }
+

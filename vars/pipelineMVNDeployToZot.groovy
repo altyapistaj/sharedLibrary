@@ -1,5 +1,5 @@
 def call(Map cfg = [:]){
-    def defaults = jobVariablesTEST(env.JOB_NAME)
+    def defaults = jobVariables(env.JOB_NAME)
 
     cfg = defaults + cfg
 
