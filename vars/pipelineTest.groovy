@@ -3,7 +3,7 @@ def call(Map cfg = [:]){
 
     cfg = defaults + cfg
 
-    node(cfg.agent ?: 'any') {
+    node() {
         if(params.Checkout){
             stage('Checkout') {
                     gitCheckout(
