@@ -1,6 +1,6 @@
 def call () {
 
-    jobVariables("${JOB_NAME}")
+    def vars = jobVariables(env.JOB_NAME)
 
     pipeline {
 
@@ -13,25 +13,25 @@ def call () {
                 when { expression { params.Checkout } }
                 steps {
                     gitCheckout(
-                            gitPathName: jobVariables.gitPathName,
-                            jobName: jobVariables.jobName,
-                            customWorkspace: jobVariables.customWorkspace,
-                            branch: jobVariables.branch
+                            gitPathName: vars.gitPathName,
+                            jobName: vars.jobName,
+                            customWorkspace: vars.customWorkspace,
+                            branch: vars.branch
                     )
                 }
             }
             stage('build') {
                 when { expression { params.Build } }
                 steps {
-                    dir(jobVariables.customWorkspace) {
-                        mavenStage(text: 'clean install -U -N', pom: '${jobVariables.pom}')
+                    dir(vars.customWorkspace) {
+                        mavenStage(text: 'clean install -U -N', pom: '${vars.pom}')
                     }
                 }
             }
             stage('extract') {
                 when { expression { params.Extract } }
                 steps {
-                    dir(jobVariables.customWorkspace) {
+                    dir(vars.customWorkspace) {
                         extractJar()
                     }
                 }
@@ -39,7 +39,7 @@ def call () {
             stage('build Docker') {
                 when { expression { params.dockerBuild } }
                 steps {
-                    dir('workspace/demo-service') {
+                    dir(vars.customWorkspace) {
                         dockerBuild()
                     }
                 }
