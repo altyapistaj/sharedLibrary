@@ -1,10 +1,9 @@
 def call () {
+
+    def vars = jobVariables(env.JOB_NAME)
+
     pipeline {
-        stage('Init') {
-            steps {
-                def vars = jobVariables(env.JOB_NAME)
-            }
-        }
+
             stage('Checkout') {
                 when { expression { params.Checkout } }
                 steps {
