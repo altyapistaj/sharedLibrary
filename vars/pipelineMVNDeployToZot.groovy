@@ -4,10 +4,9 @@ def call () {
 
     pipeline {
 
-            tools {
-                maven vars.maven
-                echo 'maven'
-            }
+        tools{
+            maven 'maven-3.9.12'
+        }
 
             stage('Checkout') {
                 when { expression { params.Checkout } }
