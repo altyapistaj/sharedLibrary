@@ -12,7 +12,9 @@ def call(Map cfg = [:]){
                             customWorkspace: cfg.customWorkspace,
                             branch: cfg.branch
                     )
-                echo "${defaults.customWorkspace}"
+                echo "${cfg.customWorkspace}"
+                echo "${cfg.jobName}"
+                echo "${cfg.gitPathName}"
             }
         }
 
