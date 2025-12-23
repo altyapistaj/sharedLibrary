@@ -12,13 +12,14 @@ def call(Map cfg = [:]){
                             customWorkspace: cfg.customWorkspace,
                             branch: cfg.branch
                     )
+                echo "${cfg.customWorkpace}"
             }
         }
 
         if(params.Build){
             stage('Build') {
                 dir(cfg.customWorkspace) {
-                    mavenStage(text: 'clean install -U -N', pom: "${cfg.pom}")
+                    mavenStage(text: 'clean install -U -N', pom: cfg.pom)
                 }
             }
         }
