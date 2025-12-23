@@ -1,19 +1,17 @@
-@Library('sharedLibrary@master') _
+def call () {
 
-pipeline {
-    agent any
+    pipeline {
 
-    tools{
-        maven 'maven-3.9.12'
-    }
+        agent any
 
-    stages {
-        stage('Parameters'){
-            steps {
-                parametersGitCheckout()
-                echo 'Parametreler set edildi'
-            }
+        options {
+            disableConcurrentBuilds()
         }
+
+        tools{
+            maven 'maven-3.9.12'
+        }
+
         stage('Checkout'){
             when { expression { params.Checkout }}
             steps {
@@ -55,5 +53,16 @@ pipeline {
                 pushToZot()
             }
         }
+
+
+        post{
+            failure {
+                notifications()
+            }
+            success {
+                fingerprint '**/target/*.jar'
+            }
+        }
+
     }
 }
