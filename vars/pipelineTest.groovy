@@ -12,7 +12,7 @@ def call(Map cfg = [:]){
                             customWorkspace: cfg.customWorkspace,
                             branch: cfg.branch
                     )
-                echo "${defaults.customWorkpace}"
+                echo "${defaults.customWorkspace}"
             }
         }
 

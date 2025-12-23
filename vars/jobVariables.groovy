@@ -9,7 +9,7 @@ def call(String JOB_NAME){
     pom : 'pom.xml',
 
     branch : "library-dependency",
-    customWorksapce : "workspace/demo-service",
+    customWorkspace : "workspace/demo-service",
     gitPathName : "altyapistaj"
     ]
 
