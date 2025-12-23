@@ -1,57 +1,56 @@
 def call () {
 
+    jobVariables("${JOB_NAME}")
+
     pipeline {
 
-        agent any
-
-        tools{
-            maven 'maven-3.9.12'
-        }
-
-        stage('Checkout'){
-            when { expression { params.Checkout }}
-            steps {
-                gitCheckout(
-                        gitPathName: 'altyapistaj',
-                        jobName: 'demo-service',
-                        customWorkspace: 'workspace/demo-service',
-                        branch: 'library-dependency'
-                )
+            tools {
+                maven jobVariables.maven
+                echo 'maven'
             }
-        }
-        stage('build'){
-            when { expression { params.Build }}
-            steps {
-                dir('workspace/demo-service'){
-                    mavenStage(text: 'clean install -U -N' , pom: 'pom.xml')
+
+            stage('Checkout') {
+                when { expression { params.Checkout } }
+                steps {
+                    gitCheckout(
+                            gitPathName: jobVariables.gitPathName,
+                            jobName: jobVariables.jobName,
+                            customWorkspace: jobVariables.customWorkspace,
+                            branch: jobVariables.branch
+                    )
                 }
             }
-        }
-        stage('extract'){
-            when { expression { params.Extract }}
-            steps {
-                dir('workspace/demo-service'){
-                    extractJar()
+            stage('build') {
+                when { expression { params.Build } }
+                steps {
+                    dir(jobVariables.customWorkspace) {
+                        mavenStage(text: 'clean install -U -N', pom: '${jobVariables.pom}')
+                    }
                 }
             }
-        }
-        stage('build Docker'){
-            when { expression { params.dockerBuild }}
-            steps {
-                dir('workspace/demo-service'){
-                    dockerBuild()
+            stage('extract') {
+                when { expression { params.Extract } }
+                steps {
+                    dir(jobVariables.customWorkspace) {
+                        extractJar()
+                    }
                 }
             }
-        }
-        stage('push to Zot'){
-            when { expression { params.pushToZot }}
-            steps {
-                pushToZot()
+            stage('build Docker') {
+                when { expression { params.dockerBuild } }
+                steps {
+                    dir('workspace/demo-service') {
+                        dockerBuild()
+                    }
+                }
             }
+            stage('push to Zot') {
+                when { expression { params.pushToZot } }
+                steps {
+                    pushToZot()
+                }
+            }
+
+
         }
-
-
-
-
     }
-}
