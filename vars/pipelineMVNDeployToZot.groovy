@@ -4,10 +4,6 @@ def call () {
 
         agent any
 
-        options {
-            disableConcurrentBuilds()
-        }
-
         tools{
             maven 'maven-3.9.12'
         }
