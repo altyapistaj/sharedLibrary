@@ -1,51 +1,51 @@
-def call () {
+def call(Map cfg = [:]){
+    def defaults = jobVariables(env.JOB_NAME)
 
-    def vars = jobVariables(env.JOB_NAME)
+    cfg = defaults + cfg
 
-    pipeline {
-
+    node() {
+        if(params.Checkout){
             stage('Checkout') {
-                when { expression { params.Checkout } }
-                steps {
                     gitCheckout(
-                            gitPathName: vars.gitPathName,
-                            jobName: vars.jobName,
-                            customWorkspace: vars.customWorkspace,
-                            branch: vars.branch
+                            gitPathName: cfg.gitPathName,
+                            jobName: cfg.jobName,
+                            customWorkspace: cfg.customWorkspace,
+                            branch: cfg.branch
                     )
-                }
+                echo "${cfg.customWorkspace}"
+                echo "${cfg.jobName}"
+                echo "${cfg.gitPathName}"
             }
-            stage('build') {
-                when { expression { params.Build } }
-                steps {
-                    dir(vars.customWorkspace) {
-                        mavenStage(text: 'clean install -U -N', pom: '${vars.pom}')
-                    }
-                }
-            }
-            stage('extract') {
-                when { expression { params.Extract } }
-                steps {
-                    dir(vars.customWorkspace) {
-                        extractJar()
-                    }
-                }
-            }
-            stage('build Docker') {
-                when { expression { params.dockerBuild } }
-                steps {
-                    dir(vars.customWorkspace) {
-                        dockerBuild()
-                    }
-                }
-            }
-            stage('push to Zot') {
-                when { expression { params.pushToZot } }
-                steps {
-                    pushToZot()
-                }
-            }
-
-
         }
+
+        if(params.Build){
+            stage('Build') {
+                dir(cfg.customWorkspace) {
+                    mavenStage(text: 'clean install -U -N', pom: cfg.pom)
+                }
+            }
+        }
+
+        if(params.Extract){
+            stage('extract') {
+                dir(cfg.customWorkspace) {
+                    extractJar()
+                }
+            }
+        }
+
+        if(params.dockerBuild){
+            stage('build Docker') {
+                dir(cfg.customWorkspace) {
+                    dockerBuild()
+                }
+            }
+        }
+        if(params.pushToZot){
+            stage('push to Zot') {
+                pushToZot()
+            }
+        }
+
     }
+}
