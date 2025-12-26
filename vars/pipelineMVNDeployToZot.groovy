@@ -7,7 +7,7 @@ def call(Map cfg = [:]){
         if(params.Checkout){
             stage('Checkout') {
                     gitCheckout(
-                            gitPathName: cfg.gitPathName,
+                            //gitPathName: cfg.gitPathName,
                             gitAdressAndName: cfg.gitAdressAndName,
                             customWorkspace: cfg.customWorkspace,
                             branch: cfg.branch
