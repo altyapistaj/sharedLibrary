@@ -5,7 +5,7 @@ def call(Map stageParams) {
     def scmVars = checkout([
             $class: 'GitSCM',
             branches: [[name: "*/${branch}" ]],
-            userRemoteConfigs: [[credentialsId: '85c6a4a3-732d-4212-b0fe-97575eec430a', url: "https://github.com/altyapi/" + stageParams.gitAdressAndName + ".git"]],
+            userRemoteConfigs: [[credentialsId: '85c6a4a3-732d-4212-b0fe-97575eec430a', url: "https://github.com/altyapistaj/" + stageParams.gitAdressAndName + ".git"]],
             extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: stageParams.customWorkspace]]
     ])
 
