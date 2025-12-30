@@ -28,7 +28,7 @@ def call(Map cfg = [:]){
     //TEST
         if(params.SonarQube){
             stage('SonarQube') {
-                    sonarStageMaven()
+                    sonarStageMaven(projectName : cfg.projectName, customWorkspace: cfg.customWorkspace, jobName: cfg.jobName )
             }
         }
 

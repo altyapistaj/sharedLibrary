@@ -1,3 +1,4 @@
+//bitmedi
 def call (Map sonarParams = [:]){
 
     def varProject = sonarParams.projectName
@@ -18,7 +19,6 @@ def call (Map sonarParams = [:]){
        def props = """\
 sonar.projectKey=${varProjectCombine}
 sonar.projectName=${varProjectCombine}
-sonar.projectVersion=${env.BUILD_NUMBER ?: "1"}
 
 
 sonar.sourceEncoding=UTF-8
