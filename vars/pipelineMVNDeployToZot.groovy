@@ -25,6 +25,12 @@ def call(Map cfg = [:]){
                 }
             }
         }
+    //TEST
+        if(params.Build){
+            stage('SonarQube') {
+                    sonarStage(projectName: cfg.projectName, jobPathName: cfg.jobPathName, jobName: cfg.jobName ,customWorkspace: cfg.customWorkspace  )
+            }
+        }
 
         if(params.Extract){
             stage('extract') {
