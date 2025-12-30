@@ -36,7 +36,7 @@ sonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
        echo "Created sonar properties at: ${pwd()}/${propsFileName}"
 
        def scannerHome = tool(
-               name: (sonarParams.scannerToolName ?: 'sonar-scanner-25.12.0.117093'),
+               name: (sonarParams.scannerToolName ?: 'sonar-scanner-2.18.2'),
                type: 'hudson.plugins.sonar.sonarRunnerInstallation'
        )
 
