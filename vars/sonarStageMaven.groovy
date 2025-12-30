@@ -1,6 +1,6 @@
 def call (Map sonarParams = [:]){
 
-    def sonarServerName = sonarParams.sonarServerName  ?: 'SonarQube-25.12'
+    def sonarServerName = sonarParams.sonarServerName  ?: 'sq1'
     def pomPath = sonarParams.pom ?: 'pom.xml'
 
 
