@@ -8,7 +8,7 @@ def call (Map sonarParams = [:]){
 
     withSonarQubeEnv(sonarServerName){
         bat """
-            mvn -B -f "${pomPath}" sonar:sonar
+            mvn  sonar:sonar
 """
     }
 }
