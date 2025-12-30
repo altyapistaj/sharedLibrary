@@ -9,7 +9,7 @@ def call (Map sonarParams = [:]){
 
     withSonarQubeEnv(sonarServerName){
         bat """
-            mvn -B -f "${pomPath}" sonar:sonar
+            mvn -B -f "${pomPath}" sorg.sonarsource.scanner.maven:sonar-maven-plugin:3.10.0.2594:sonar
 """.trim()
     }
 }
