@@ -8,7 +8,7 @@ def call (Map sonarParams = [:]){
 
     withSonarQubeEnv(sonarServerName){
         bat """
-            mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.token=squ_1fde7c1ac446e177e3999df97de6c73293d3e0da
+            mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
 """
     }
 }
