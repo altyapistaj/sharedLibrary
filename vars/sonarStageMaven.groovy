@@ -5,7 +5,6 @@ def call (Map sonarParams = [:]){
 
     bat 'cd'
     bat 'dir'
-    bat 'type pom.xml | findstr /i "sonar-maven-plugin"'
 
     withSonarQubeEnv(sonarServerName){
         bat """
