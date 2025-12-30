@@ -4,7 +4,7 @@ def call (Map sonarParams){
     def varProjectRootName = sonarParams.customWorkspace
     def varProjectCombine = sonarParams.jobName
 
-    def varProjectPath = "/var/lib/jenkins/workspace/$varProject"
+    def varProjectPath = "/workspace/$varProject"
     def varProjectRootPath = "$varProjectRootName"
     def varProjectRootSQWorkspacePath = "$varProjectRootPath"
 
