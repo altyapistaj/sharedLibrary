@@ -39,10 +39,11 @@ sonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
                name: (sonarParams.scannerToolName ?: 'sonar-scanner')
        )
 
-       withSonerQubeEnv('sq1')
-
-       bat """
+       withSonerQubeEnv('sq1'){
+           bat """
         "${scannerHome}\\bin\\sonar-scanner.bat -Dproject.settings="${propsFileName}""
-""".trim()
+        """.trim()
+       }
+
    }
 }
