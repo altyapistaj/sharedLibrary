@@ -15,7 +15,7 @@ def call (Map sonarParams = [:]){
     echo "varProjectRootName=${varProjectRootName}"
     echo "varProjectCombine=${varProjectCombine}"
 
-
+   dir("${varProjectRootName}") {
        def props = """\
 sonar.projectKey=${varProjectCombine}
 sonar.projectName=${varProjectCombine}
@@ -45,5 +45,5 @@ sonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
         """.trim()
        }
 
-
+   }
 }
