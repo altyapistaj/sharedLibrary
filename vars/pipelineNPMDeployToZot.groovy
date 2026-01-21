@@ -7,22 +7,19 @@ def call(Map cfg = [:]){
         if(params.Checkout){
             stage('Checkout') {
                 gitCheckout(
-                        //gitPathName: cfg.gitPathName,
                         gitAdressAndName: cfg.gitAdressAndName,
                         customWorkspace: cfg.customWorkspace,
                         branch: cfg.branch
                 )
                 echo "${cfg.customWorkspace}"
                 echo "${cfg.jobName}"
-                echo "${cfg.gitPathName}"
             }
         }
 
         if(params.install){
             stage('Install') {
-                dir(cfg.customWorkspace) {
                     bat 'npm ci'
-                }
+
             }
         }
 
@@ -35,17 +32,15 @@ def call(Map cfg = [:]){
 
         if(params.Build){
             stage('Build') {
-                dir(cfg.customWorkspace) {
                     bat 'npm run build'
-                }
+
             }
         }
 
         if(params.dockerBuild){
             stage('build Docker') {
-                dir(cfg.customWorkspace) {
                     dockerBuild()
-                }
+
             }
         }
         if(params.pushToZot){
