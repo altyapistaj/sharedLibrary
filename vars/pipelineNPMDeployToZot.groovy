@@ -16,13 +16,12 @@ def call(Map cfg = [:]){
             }
         }
 
-        if(params.install){
+        if(params.Install){
             stage('Install') {
                     bat 'npm ci'
 
             }
         }
-
 
         if(params.Test){
             stage('Test') {
