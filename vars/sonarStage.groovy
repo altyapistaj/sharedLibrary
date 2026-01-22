@@ -15,7 +15,7 @@ def call (Map sonarParams = [:]){
     echo "varProjectRootName=${varProjectRootName}"
     echo "varProjectCombine=${varProjectCombine}"
 
-   dir("${varProjectRootName}") {
+   //dir("${varProjectRootName}") {}
        def props = """\
 sonar.projectKey=${varProjectCombine}
 sonar.projectName=${varProjectCombine}
@@ -48,5 +48,5 @@ sonar.exclusions=node_modules/**,build/**
         """.trim()
        }
 
-   }
+
 }

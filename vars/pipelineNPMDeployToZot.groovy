@@ -33,7 +33,6 @@ def call(Map cfg = [:]){
             stage('SonarQube') {
                 sonarStage(
                         projectName : cfg.projectName,
-                        customWorkspace: cfg.customWorkspace,
                         jobName: cfg.jobName
                 )
             }
