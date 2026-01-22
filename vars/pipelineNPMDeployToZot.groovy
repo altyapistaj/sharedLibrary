@@ -27,7 +27,7 @@ def call(Map cfg = [:]){
             stage('Test') {
                 bat 'dir'
                 bat 'dir src/'
-                bat 'set CI=false && npm test -- --coverage'
+                bat 'npm test -- --coverage --testMatch="**/src/**/*.test.js"'
             }
         }
 
