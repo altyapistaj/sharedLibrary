@@ -32,6 +32,7 @@ sonar.javascript.lcov.reportPaths=coverage/lcov.info
 
 sonar.exclusions=node_modules/**,build/**
 
+
 """.stripIndent()
        writeFile file: propsFileName, text: props
 
