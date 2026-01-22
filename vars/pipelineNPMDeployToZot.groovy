@@ -28,7 +28,7 @@ def call(Map cfg = [:]){
                 environment {
                     CI = 'false'
                 }
-                bat 'CI=false npm test -- --coverage'
+                bat 'npm test -- --coverage'
             }
         }
 
