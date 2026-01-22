@@ -46,7 +46,6 @@ def call(Map cfg = [:]){
                 sonarStage(
                         projectName : cfg.projectName,
                         jobName: cfg.jobName,
-                        version : version
                 )
             }
         }

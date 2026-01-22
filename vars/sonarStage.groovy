@@ -21,7 +21,7 @@ sonar.projectName=${varProjectCombine}
 
 
 sonar.sourceEncoding=UTF-8
-sonar.projectVersion=1.0
+sonar.projectVersion=${env.APP_VERSION}
 
 sonar.sources=src
 sonar.language=js
