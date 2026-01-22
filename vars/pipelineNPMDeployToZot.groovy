@@ -23,7 +23,7 @@ def call(Map cfg = [:]){
         }
 
         stage('test'){
-            bat'echo version'
+            bat'echo ${version}'
         }
 
 
