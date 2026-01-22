@@ -17,7 +17,9 @@ def call(Map cfg = [:]){
         }
 
         stage('Variables'){
-            packageJSON(cfg.jobName)
+            packageJSON(
+                    customWorkspace : cfg.customWorkspace
+            )
         }
 
         if(params.Install){
