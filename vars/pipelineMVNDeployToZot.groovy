@@ -9,7 +9,8 @@ def call(Map cfg = [:]){
                     gitCheckout(
                             gitAdressAndName: cfg.gitAdressAndName,
                             customWorkspace: cfg.customWorkspace,
-                            branch: cfg.branch
+                            branch: cfg.branch,
+                            organizationName : cfg.organizationName
                     )
                 echo "${cfg.customWorkspace}"
                 echo "${cfg.jobName}"
