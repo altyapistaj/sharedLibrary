@@ -26,6 +26,8 @@ def call(Map cfg = [:]){
         if(params.Test){
             stage('Test') {
                 bat 'dir'
+                bat 'cd src'
+                bat 'dir'
                 bat 'set CI=false && npm test -- --coverage'
             }
         }
