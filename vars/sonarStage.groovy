@@ -40,6 +40,7 @@ sonar.exclusions=node_modules/**,build/**
                name: (sonarParams.scannerToolName ?: 'sonar-scanner')
        )
 
+    //jenkins system ayarlarında tanımlanan SonarQube adı
        withSonarQubeEnv('sq1'){
            bat """
         "${scannerHome}\\bin\\sonar-scanner.bat" -Dproject.settings="${propsFileName}"

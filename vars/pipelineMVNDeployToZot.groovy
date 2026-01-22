@@ -17,6 +17,10 @@ def call(Map cfg = [:]){
             }
         }
 
+        stage('Version'){
+            pomVersion()
+        }
+
         if(params.Build){
             stage('Build') {
                 dir(cfg.customWorkspace) {
