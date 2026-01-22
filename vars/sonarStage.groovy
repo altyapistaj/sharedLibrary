@@ -25,7 +25,6 @@ sonar.sourceEncoding=UTF-8
 sonar.projectVersion=1.0
 
 sonar.sources=src
-sonar.tests=src
 sonar.language=js
 
 sonar.javascript.lcov.reportPaths=coverage/lcov.info
