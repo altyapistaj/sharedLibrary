@@ -18,14 +18,14 @@ def call(Map cfg = [:]){
 
         if(params.Install){
             stage('Install') {
-                    bat 'npm ci'
+                    NPMCi()
 
             }
         }
 
         if(params.Test){
             stage('Test') {
-                bat 'npm test -- --coverage --testMatch="**/src/**/*.test.js"'
+                NPMTest()
             }
         }
 
@@ -40,7 +40,7 @@ def call(Map cfg = [:]){
 
         if(params.Build){
             stage('Build') {
-                    bat 'npm run build'
+                    NPMBuild()
 
             }
         }
