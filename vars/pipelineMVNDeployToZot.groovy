@@ -36,17 +36,14 @@ def call(Map cfg = [:]){
 
         if(params.Extract){
             stage('extract') {
-                dir(cfg.customWorkspace) {
-                    extractJar()
-                }
+                extractJar()
             }
         }
 
         if(params.dockerBuild){
             stage('build Docker') {
-                dir(cfg.customWorkspace) {
                     dockerBuild()
-                }
+
             }
         }
         if(params.pushToZot){
