@@ -1,14 +1,13 @@
 def call (Map sonarParams = [:]){
 
-    def varProject = sonarParams.projectName
     def varProjectRootName = sonarParams.customWorkspace
     def varProjectCombine = sonarParams.jobName
 
     def propsFileName="${varProjectCombine}.sonar-project.properties"
 
-    def varProjectPath = "/workspace/$varProject"
-    def varProjectRootPath = "$varProjectRootName"
-    def varProjectRootSQWorkspacePath = "$varProjectRootPath"
+
+
+
 
     echo "varProject=${varProjectRootName}"
     echo "varProjectRootName=${varProjectRootName}"
@@ -36,6 +35,7 @@ sonar.exclusions=node_modules/**,build/**
 
        echo "Created sonar properties at: ${pwd()}/${propsFileName}"
 
+    //jenkins toolda tanımlanan SonarQube adı
        def scannerHome = tool(
                name: (sonarParams.scannerToolName ?: 'sonar-scanner')
        )
