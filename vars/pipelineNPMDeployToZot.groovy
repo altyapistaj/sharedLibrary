@@ -25,8 +25,6 @@ def call(Map cfg = [:]){
 
         if(params.Test){
             stage('Test') {
-                bat 'dir'
-                bat 'dir src/'
                 bat 'npm test -- --coverage --testMatch="**/src/**/*.test.js"'
             }
         }
