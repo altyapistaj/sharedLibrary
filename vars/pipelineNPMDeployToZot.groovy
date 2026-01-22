@@ -25,10 +25,11 @@ def call(Map cfg = [:]){
 
         if(params.Test){
             stage('Test') {
-                environment {
-                    CI = 'false'
-                }
-                bat 'npm test -- --coverage'
+
+                bat '''
+                        npm test -- --coverage
+                        set CI=false
+                        '''
             }
         }
 
