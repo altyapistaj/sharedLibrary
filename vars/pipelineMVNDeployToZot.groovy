@@ -23,11 +23,10 @@ def call(Map cfg = [:]){
         }
 
         if(params.Build){
-            stage('Build') {
-                dir(cfg.customWorkspace) {
+            stage('Build')
                     mavenStage(text: 'clean install -U -N', pom: cfg.pom)
-                }
-            }
+
+
         }
         if(params.SonarQube){
             stage('SonarQube') {
