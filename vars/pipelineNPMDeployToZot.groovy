@@ -16,6 +16,10 @@ def call(Map cfg = [:]){
             }
         }
 
+        stage('Variables'){
+            packageJSON(cfg.jobName)
+        }
+
         if(params.Install){
             stage('Install') {
                     NPMCi()

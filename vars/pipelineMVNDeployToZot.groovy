@@ -7,7 +7,6 @@ def call(Map cfg = [:]){
         if(params.Checkout){
             stage('Checkout') {
                     gitCheckout(
-                            //gitPathName: cfg.gitPathName,
                             gitAdressAndName: cfg.gitAdressAndName,
                             customWorkspace: cfg.customWorkspace,
                             branch: cfg.branch
@@ -25,7 +24,6 @@ def call(Map cfg = [:]){
                 }
             }
         }
-    //TEST
         if(params.SonarQube){
             stage('SonarQube') {
                     sonarStageMaven()
