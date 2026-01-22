@@ -1,4 +1,3 @@
-//bitmedi
 def call (Map sonarParams = [:]){
 
     def varProject = sonarParams.projectName

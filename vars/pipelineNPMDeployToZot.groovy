@@ -22,6 +22,12 @@ def call(Map cfg = [:]){
             )
         }
 
+        stage('test'){
+            bat'echo version'
+        }
+
+
+
         if(params.Install){
             stage('Install') {
                     NPMCi()
@@ -39,7 +45,8 @@ def call(Map cfg = [:]){
             stage('SonarQube') {
                 sonarStage(
                         projectName : cfg.projectName,
-                        jobName: cfg.jobName
+                        jobName: cfg.jobName,
+                        version : version
                 )
             }
         }
