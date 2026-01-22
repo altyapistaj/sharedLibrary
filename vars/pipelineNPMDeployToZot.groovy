@@ -17,13 +17,13 @@ def call(Map cfg = [:]){
         }
 
         stage('Variables'){
-            packageJSON(
+            env.APP_VERSION = packageJSON(
                     customWorkspace : cfg.customWorkspace
             )
         }
 
         stage('test'){
-            bat "echo ${version}"
+            bat "echo %APP_VERSION%"
         }
 
 
