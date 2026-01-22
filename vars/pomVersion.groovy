@@ -1,10 +1,7 @@
 def call() {
-    def version = bat(
-            script: "mvn help:evaluate -Dexpression=project.version -q -DforceStdout",
-            returnStdout : true
-    ).trim()
+    def pom = readMavenPom file: 'pom.xml'
+    env.APP_VERSION = pom.version
 
-    env.APP_VERSION = version
     echo "Maven version =${env.APP_VERSION}"
     echo "${POM_VERSION}"
 
