@@ -6,6 +6,6 @@ def call() {
 
     env.APP_VERSION = version
     echo "Maven version =${env.APP_VERSION}"
-    echo ${POM_VERSION}
+    echo ${POM_VERSION}""
 
 }
