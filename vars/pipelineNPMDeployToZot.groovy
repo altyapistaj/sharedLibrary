@@ -17,7 +17,7 @@ def call(Map cfg = [:]){
         }
 
         stage('Variables'){
-            packageJSON(
+            def version = packageJSON(
                     customWorkspace : cfg.customWorkspace
             )
         }
