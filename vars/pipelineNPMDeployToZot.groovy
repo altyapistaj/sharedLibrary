@@ -25,8 +25,9 @@ def call(Map cfg = [:]){
 
         if(params.Test){
             stage('Test') {
-                bat 'node -v'
-                bat 'set CI=false' //TODO:linux'e çevirilecek
+                environment {
+                    CI = 'false'
+                }
                 bat 'CI=false npm test -- --coverage'
             }
         }
