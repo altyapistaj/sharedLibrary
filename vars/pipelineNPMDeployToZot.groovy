@@ -29,6 +29,16 @@ def call(Map cfg = [:]){
             }
         }
 
+        if(params.SonarQube){
+            stage('SonarQube') {
+                sonarStage(
+                        projectName : cfg.projectName,
+                        customWorkspace: cfg.customWorkspace,
+                        jobName: cfg.jobName
+                )
+            }
+        }
+
         if(params.Build){
             stage('Build') {
                     bat 'npm run build'

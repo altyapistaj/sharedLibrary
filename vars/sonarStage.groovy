@@ -22,14 +22,16 @@ sonar.projectName=${varProjectCombine}
 
 
 sonar.sourceEncoding=UTF-8
+sonar.projectVersion=1.0
 
-sonar.sources=src/main/java
-sonar.tests=src/test/java
+sonar.sources=src
+sonar.tests=src
+sonar.language=js
 
-sonar.java.binaries=target/classes
+sonar.javascript.lcov.reportPaths=coverage/lcov.info
 
-sonar.junit.reportPaths=target/surefire-reports
-sonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+sonar.exclusions=node_modules/**,build/**
+
 """.stripIndent()
        writeFile file: propsFileName, text: props
 
