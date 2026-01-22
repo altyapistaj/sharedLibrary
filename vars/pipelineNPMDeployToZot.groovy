@@ -26,7 +26,6 @@ def call(Map cfg = [:]){
         if(params.Test){
             stage('Test') {
                 bat 'node -v'
-                bat 'pwd' // Test
                 bat 'ls'
                 bat 'CI=false npm test -- --coverage'
             }
