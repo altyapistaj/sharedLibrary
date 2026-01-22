@@ -27,8 +27,8 @@ def call(Map cfg = [:]){
             stage('Test') {
 
                 bat '''
-                        npm test -- --coverage
                         set CI=false
+                        npm test -- --coverage
                         '''
             }
         }
