@@ -1,6 +1,7 @@
 def call(Map stageParams) {
     def branch = stageParams.branch ?: (env.BRANCH_NAME ?: 'main')
 
+    echo "${cfg.organizationName}"
 
     def scmVars = checkout([
             $class: 'GitSCM',
