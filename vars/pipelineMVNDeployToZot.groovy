@@ -5,6 +5,7 @@ def call(Map cfg = [:]){
 
     node() {
         if(params.Checkout){
+            echo "${organizationName}"
             stage('Checkout') {
                     gitCheckout(
                             gitAdressAndName: cfg.gitAdressAndName,
