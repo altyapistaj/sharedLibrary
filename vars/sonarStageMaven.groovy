@@ -4,7 +4,7 @@ def call (Map sonarParams = [:]){
     def pomPath = sonarParams.pom ?: 'pom.xml'
 
     withSonarQubeEnv(sonarServerName){
-        bat """
+        sh """
             mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
 """
     }
