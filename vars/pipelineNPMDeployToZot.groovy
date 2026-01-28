@@ -23,10 +23,6 @@ def call(Map cfg = [:]){
             )
         }
 
-        stage('test'){
-            bat "echo %APP_VERSION%"
-        }
-
 
 
         if(params.Install){

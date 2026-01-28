@@ -1,4 +1,3 @@
 def call (){
-    //TODO: linux/bash komutlarına çevirilecek.
-    bat "npm run build"
+    sh "npm run build"
 }
